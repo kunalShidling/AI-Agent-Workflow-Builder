@@ -5,6 +5,7 @@ import { checkAndConsumeQuota } from '../services/quotaService';
 import { executeStep } from './stepExecutor';
 import { ExecutionContext } from './context';
 import { logger } from '../utils/logger';
+import { query } from '../utils/db';
 
 export async function triggerWorkflowRun(
   userId: string | null, 

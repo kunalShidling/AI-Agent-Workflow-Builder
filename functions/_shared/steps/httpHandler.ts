@@ -1,5 +1,4 @@
 import { ExecutionContext, IStepHandler, StepOutput, resolvePlaceholders } from '../executor/context';
-import fetch from 'node-fetch';
 
 export class HTTPHandler implements IStepHandler {
   async execute(config: any, context: ExecutionContext): Promise<StepOutput> {

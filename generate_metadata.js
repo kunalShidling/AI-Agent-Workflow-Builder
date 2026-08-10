@@ -522,7 +522,7 @@ actions:
   - name: triggerWorkflowRun
     definition:
       kind: synchronous
-      handler: "{{NHOST_BACKEND_URL}}/api/triggerWorkflowRun"
+      handler: "{{NHOST_FUNCTIONS_URL}}/triggerWorkflowRun"
       forward_client_headers: true
       headers:
         - name: Authorization
@@ -530,7 +530,7 @@ actions:
   - name: approveStep
     definition:
       kind: synchronous
-      handler: "{{NHOST_BACKEND_URL}}/api/approveStep"
+      handler: "{{NHOST_FUNCTIONS_URL}}/approveStep"
       forward_client_headers: true
       headers:
         - name: Authorization
@@ -538,7 +538,7 @@ actions:
   - name: webhookTrigger
     definition:
       kind: synchronous
-      handler: "{{NHOST_BACKEND_URL}}/api/webhookTrigger"
+      handler: "{{NHOST_FUNCTIONS_URL}}/webhookTrigger"
       forward_client_headers: true
 custom_types:
   enums: []

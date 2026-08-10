@@ -1,5 +1,4 @@
 import { ExecutionContext, IStepHandler, StepOutput, resolvePlaceholders } from '../executor/context';
-import fetch from 'node-fetch';
 import { logger } from '../utils/logger';
 
 export class LLMHandler implements IStepHandler {
