@@ -99,3 +99,14 @@ delete_permissions:
                   _eq: X-Hasura-User-Id
               - role:
                   _eq: owner
+event_triggers:
+  - name: workflow_created_event
+    definition:
+      enable_manual: false
+      insert:
+        columns: "*"
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: "{{NHOST_FUNCTIONS_URL}}/dbEventTrigger"

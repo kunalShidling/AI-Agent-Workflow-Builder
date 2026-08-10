@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["./triggerWorkflowRun.ts", "./approveStep.ts", "./webhookTrigger.ts", "./_shared/**/*"]
+  "include": ["./triggerWorkflowRun.ts", "./approveStep.ts", "./webhookTrigger.ts", "./scheduledTrigger.ts", "./dbEventTrigger.ts", "./_shared/**/*"]
 }
