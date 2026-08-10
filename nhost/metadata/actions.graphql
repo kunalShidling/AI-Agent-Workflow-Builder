@@ -1,1 +1,33 @@
-type TriggerResponse {\n  workflow_run_id: uuid!\n  status: String!\n}\n\ninput TriggerInput {\n  workflow_id: uuid!\n}\n\ntype ApproveResponse {\n  success: Boolean!\n  step_run_id: uuid!\n}\n\ninput ApproveInput {\n  step_run_id: uuid!\n}\n\ntype WebhookTriggerResponse {\n  workflow_run_id: uuid!\n  status: String!\n}\n\ninput WebhookTriggerInput {\n  workflow_id: uuid!\n  payload: jsonb\n}\n\ntype Mutation {\n  triggerWorkflowRun(input: TriggerInput!): TriggerResponse\n}\n\ntype Mutation {\n  approveStep(input: ApproveInput!): ApproveResponse\n}\n\ntype Mutation {\n  webhookTrigger(input: WebhookTriggerInput!): WebhookTriggerResponse\n}
+type TriggerResponse {
+  workflow_run_id: uuid!
+  status: String!
+}
+
+input TriggerInput {
+  workflow_id: uuid!
+}
+
+type ApproveResponse {
+  success: Boolean!
+  step_run_id: uuid!
+}
+
+input ApproveInput {
+  step_run_id: uuid!
+}
+
+type WebhookTriggerResponse {
+  workflow_run_id: uuid!
+  status: String!
+}
+
+input WebhookTriggerInput {
+  workflow_id: uuid!
+  payload: jsonb
+}
+
+type Mutation {
+  triggerWorkflowRun(input: TriggerInput!): TriggerResponse
+  approveStep(input: ApproveInput!): ApproveResponse
+  webhookTrigger(input: WebhookTriggerInput!): WebhookTriggerResponse
+}

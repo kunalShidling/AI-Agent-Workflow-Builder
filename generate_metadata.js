@@ -582,16 +582,10 @@ const actionsGraphql = [
   "",
   "type Mutation {",
   "  triggerWorkflowRun(input: TriggerInput!): TriggerResponse",
-  "}",
-  "",
-  "type Mutation {",
   "  approveStep(input: ApproveInput!): ApproveResponse",
-  "}",
-  "",
-  "type Mutation {",
   "  webhookTrigger(input: WebhookTriggerInput!): WebhookTriggerResponse",
   "}"
-].join('\\n');
+].join('\n');
 
 writeYaml(path.join(root, 'actions.graphql'), actionsGraphql);
 
