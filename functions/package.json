@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "test": "jest"
+    "test": "jest --config _jest.config.js"
   },
   "dependencies": {
     "pg": "^8.11.3"

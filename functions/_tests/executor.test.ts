@@ -1,19 +1,19 @@
-import { executeStep } from '../src/executor/stepExecutor';
-import { triggerWorkflowRun } from '../src/executor/workflowExecutor';
-import { ExecutionContext } from '../src/executor/context';
+import { executeStep } from '../_shared/executor/stepExecutor';
+import { triggerWorkflowRun } from '../_shared/executor/workflowExecutor';
+import { ExecutionContext } from '../_shared/executor/context';
 import fetch from 'node-fetch';
-import * as authService from '../src/services/authorizationService';
-import * as quotaService from '../src/services/quotaService';
-import * as workflowService from '../src/services/workflowService';
-import * as executionService from '../src/services/executionService';
-import * as db from '../src/utils/db';
+import * as authService from '../_shared/services/authorizationService';
+import * as quotaService from '../_shared/services/quotaService';
+import * as workflowService from '../_shared/services/workflowService';
+import * as executionService from '../_shared/services/executionService';
+import * as db from '../_shared/utils/db';
 
 jest.mock('node-fetch');
-jest.mock('../src/utils/db');
-jest.mock('../src/services/authorizationService');
-jest.mock('../src/services/quotaService');
-jest.mock('../src/services/workflowService');
-jest.mock('../src/services/executionService');
+jest.mock('../_shared/utils/db');
+jest.mock('../_shared/services/authorizationService');
+jest.mock('../_shared/services/quotaService');
+jest.mock('../_shared/services/workflowService');
+jest.mock('../_shared/services/executionService');
 
 const mockFetch = fetch as jest.MockedFunction<typeof fetch>;
 

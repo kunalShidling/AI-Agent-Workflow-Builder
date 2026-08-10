@@ -1,14 +1,14 @@
-import { triggerWorkflowRunHandler } from '../src/actions/triggerWorkflowRun';
-import { approveStepHandler } from '../src/actions/approveStep';
-import { triggerWorkflowRun, resumeWorkflowRun } from '../src/executor/workflowExecutor';
-import { query } from '../src/utils/db';
-import * as authService from '../src/services/authorizationService';
-import * as quotaService from '../src/services/quotaService';
+import { triggerWorkflowRunHandler } from '../_shared/actions/triggerWorkflowRun';
+import { approveStepHandler } from '../_shared/actions/approveStep';
+import { triggerWorkflowRun, resumeWorkflowRun } from '../_shared/executor/workflowExecutor';
+import { query } from '../_shared/utils/db';
+import * as authService from '../_shared/services/authorizationService';
+import * as quotaService from '../_shared/services/quotaService';
 
-jest.mock('../src/executor/workflowExecutor');
-jest.mock('../src/utils/db');
-jest.mock('../src/services/authorizationService');
-jest.mock('../src/services/quotaService');
+jest.mock('../_shared/executor/workflowExecutor');
+jest.mock('../_shared/utils/db');
+jest.mock('../_shared/services/authorizationService');
+jest.mock('../_shared/services/quotaService');
 
 const mockQuery = query as jest.Mock;
 

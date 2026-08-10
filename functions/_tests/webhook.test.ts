@@ -1,11 +1,11 @@
-import { webhookTriggerHandler } from '../src/actions/webhookTrigger';
-import { triggerWorkflowRun as executorTrigger } from '../src/executor/workflowExecutor';
-import { query } from '../src/utils/db';
-import { checkAndConsumeQuota } from '../src/services/quotaService';
+import { webhookTriggerHandler } from '../_shared/actions/webhookTrigger';
+import { triggerWorkflowRun as executorTrigger } from '../_shared/executor/workflowExecutor';
+import { query } from '../_shared/utils/db';
+import { checkAndConsumeQuota } from '../_shared/services/quotaService';
 
-jest.mock('../src/executor/workflowExecutor');
-jest.mock('../src/utils/db');
-jest.mock('../src/services/quotaService');
+jest.mock('../_shared/executor/workflowExecutor');
+jest.mock('../_shared/utils/db');
+jest.mock('../_shared/services/quotaService');
 
 const mockQuery = query as jest.Mock;
 
@@ -104,7 +104,7 @@ describe('Webhook Trigger Security & Logic', () => {
   // G - N are mostly executor level or integration tests.
   // We can test context resolution for G directly here.
   test('G. Valid webhook payload reaches LLM step via context placeholder', () => {
-    import { resolvePlaceholders } from '../src/executor/context';
+    import { resolvePlaceholders } from '../_shared/executor/context';
     const context = {
       workflowRunId: 'run1',
       workflowId: 'wf1',
