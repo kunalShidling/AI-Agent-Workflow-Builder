@@ -521,6 +521,7 @@ writeYaml(path.join(root, 'actions.yaml'), `
 actions:
   - name: triggerWorkflowRun
     definition:
+      kind: synchronous
       handler: "{{NHOST_BACKEND_URL}}/api/triggerWorkflowRun"
       forward_client_headers: true
       headers:
@@ -528,6 +529,7 @@ actions:
           value_from_env: NHOST_WEBHOOK_SECRET
   - name: approveStep
     definition:
+      kind: synchronous
       handler: "{{NHOST_BACKEND_URL}}/api/approveStep"
       forward_client_headers: true
       headers:
@@ -535,6 +537,7 @@ actions:
           value_from_env: NHOST_WEBHOOK_SECRET
   - name: webhookTrigger
     definition:
+      kind: synchronous
       handler: "{{NHOST_BACKEND_URL}}/api/webhookTrigger"
       forward_client_headers: true
 custom_types:
