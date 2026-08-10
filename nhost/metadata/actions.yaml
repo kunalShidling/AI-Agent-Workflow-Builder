@@ -1,0 +1,30 @@
+actions:
+  - name: triggerWorkflowRun
+    definition:
+      handler: "{{NHOST_BACKEND_URL}}/api/triggerWorkflowRun"
+      forward_client_headers: true
+      headers:
+        - name: Authorization
+          value_from_env: NHOST_WEBHOOK_SECRET
+  - name: approveStep
+    definition:
+      handler: "{{NHOST_BACKEND_URL}}/api/approveStep"
+      forward_client_headers: true
+      headers:
+        - name: Authorization
+          value_from_env: NHOST_WEBHOOK_SECRET
+  - name: webhookTrigger
+    definition:
+      handler: "{{NHOST_BACKEND_URL}}/api/webhookTrigger"
+      forward_client_headers: true
+custom_types:
+  enums: []
+  input_objects:
+    - name: TriggerInput
+    - name: ApproveInput
+    - name: WebhookTriggerInput
+  objects:
+    - name: TriggerResponse
+    - name: ApproveResponse
+    - name: WebhookTriggerResponse
+  scalars: []

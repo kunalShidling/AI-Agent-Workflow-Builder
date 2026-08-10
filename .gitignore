@@ -1,0 +1,14 @@
+.secrets
+.env
+.env.*
+!.env.example
+
+node_modules/
+.next/
+dist/
+build/
+*.log
+
+.vscode/
+.idea/
+.nhost/

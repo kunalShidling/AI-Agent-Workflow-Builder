@@ -1,0 +1,101 @@
+table:
+  name: workflow_steps
+  schema: public
+object_relationships:
+  - name: workflow
+    using:
+      foreign_key_constraint_on: workflow_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        _or:
+          - _and:
+              - workflow:
+                  organization:
+                    org_members:
+                      user_id:
+                        _eq: X-Hasura-User-Id
+                      role:
+                        _eq: owner
+          - _and:
+              - workflow:
+                  organization:
+                    org_members:
+                      user_id:
+                        _eq: X-Hasura-User-Id
+                      role:
+                        _eq: editor
+              - type:
+                  _nin:
+                    - db_write
+                    - notify
+      columns:
+        - workflow_id
+        - step_order
+        - name
+        - type
+        - config
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - workflow_id
+        - step_order
+        - name
+        - type
+        - config
+        - created_at
+        - updated_at
+      filter:
+        workflow:
+          organization:
+            org_members:
+              user_id:
+                _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - step_order
+        - name
+        - type
+        - config
+      filter:
+        _or:
+          - _and:
+              - workflow:
+                  organization:
+                    org_members:
+                      user_id:
+                        _eq: X-Hasura-User-Id
+                      role:
+                        _eq: owner
+          - _and:
+              - workflow:
+                  organization:
+                    org_members:
+                      user_id:
+                        _eq: X-Hasura-User-Id
+                      role:
+                        _eq: editor
+              - type:
+                  _nin:
+                    - db_write
+                    - notify
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        workflow:
+          organization:
+            org_members:
+              _and:
+                - user_id:
+                    _eq: X-Hasura-User-Id
+                - role:
+                    _in:
+                      - owner
+                      - editor

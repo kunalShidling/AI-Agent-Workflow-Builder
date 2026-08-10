@@ -1,0 +1,21 @@
+{
+  "name": "ai-workflow-builder-backend",
+  "version": "1.0.0",
+  "description": "Backend services and actions for AI workflow builder",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/pg": "^8.10.2",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1"
+  }
+}

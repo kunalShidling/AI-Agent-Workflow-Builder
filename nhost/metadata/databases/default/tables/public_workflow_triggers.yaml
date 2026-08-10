@@ -1,0 +1,94 @@
+table:
+  name: workflow_triggers
+  schema: public
+object_relationships:
+  - name: workflow
+    using:
+      foreign_key_constraint_on: workflow_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        _or:
+          - _and:
+              - workflow:
+                  organization:
+                    org_members:
+                      user_id:
+                        _eq: X-Hasura-User-Id
+                      role:
+                        _eq: owner
+          - _and:
+              - workflow:
+                  organization:
+                    org_members:
+                      user_id:
+                        _eq: X-Hasura-User-Id
+                      role:
+                        _eq: editor
+              - trigger_type:
+                  _neq: webhook
+      columns:
+        - workflow_id
+        - trigger_type
+        - config
+        - enabled
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - workflow_id
+        - trigger_type
+        - config
+        - enabled
+        - created_at
+        - updated_at
+      filter:
+        workflow:
+          organization:
+            org_members:
+              user_id:
+                _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - config
+        - enabled
+        - trigger_type
+      filter:
+        _or:
+          - _and:
+              - workflow:
+                  organization:
+                    org_members:
+                      user_id:
+                        _eq: X-Hasura-User-Id
+                      role:
+                        _eq: owner
+          - _and:
+              - workflow:
+                  organization:
+                    org_members:
+                      user_id:
+                        _eq: X-Hasura-User-Id
+                      role:
+                        _eq: editor
+              - trigger_type:
+                  _neq: webhook
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        workflow:
+          organization:
+            org_members:
+              _and:
+                - user_id:
+                    _eq: X-Hasura-User-Id
+                - role:
+                    _in:
+                      - owner
+                      - editor
