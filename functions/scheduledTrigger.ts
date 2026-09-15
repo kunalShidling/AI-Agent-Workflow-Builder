@@ -67,7 +67,7 @@ export default async function scheduledTriggerHandler(req: any, res: any) {
           logger.info(`Scheduled trigger firing for workflow ${trigger.workflow_id}`);
           
           // Execute asynchronously so one slow workflow doesn't block the scheduler loop
-          triggerWorkflowRun(trigger.workflow_id, 'scheduled').catch(err => {
+          triggerWorkflowRun(null, trigger.workflow_id, 'scheduled', null).catch(err => {
             logger.error(`Failed to execute scheduled workflow ${trigger.workflow_id}:`, { error: err.message });
           });
           
