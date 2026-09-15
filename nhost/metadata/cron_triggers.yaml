@@ -1,5 +1,5 @@
 - name: workflow_master_scheduler
-  webhook: "{{NHOST_BACKEND_URL}}/v1/functions/scheduledTrigger"
+  webhook: "{{NHOST_FUNCTIONS_URL}}/scheduledTrigger"
   schedule: "* * * * *"
   include_in_metadata: true
   payload: {}
