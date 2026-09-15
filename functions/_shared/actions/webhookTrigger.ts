@@ -2,6 +2,7 @@ import { triggerWorkflowRun as executorTrigger } from '../executor/workflowExecu
 import { checkAndConsumeQuota } from '../services/quotaService';
 import { query } from '../utils/db';
 import { logger } from '../utils/logger';
+import * as crypto from 'crypto';
 
 export interface WebhookActionRequest {
   input: {
@@ -56,7 +57,15 @@ export async function webhookTriggerHandler(req: WebhookActionRequest) {
     // 3. Authenticate Secret
     // Assuming config is JSONB containing { "secret": "..." }
     const storedSecret = typeof wf.config === 'string' ? JSON.parse(wf.config).secret : wf.config?.secret;
-    if (!storedSecret || secret !== storedSecret) {
+    if (!storedSecret) {
+      throw new Error('Invalid webhook secret');
+    }
+    
+    // Use timingSafeEqual to prevent timing attacks
+    const secretBuffer = Buffer.from(secret, 'utf8');
+    const storedSecretBuffer = Buffer.from(storedSecret, 'utf8');
+    
+    if (secretBuffer.length !== storedSecretBuffer.length || !crypto.timingSafeEqual(secretBuffer, storedSecretBuffer)) {
       throw new Error('Invalid webhook secret');
     }
 

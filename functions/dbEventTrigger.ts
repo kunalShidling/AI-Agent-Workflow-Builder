@@ -34,8 +34,8 @@ export default async function dbEventTriggerHandler(req: any, res: any) {
         
         try {
           // Fire the workflow, injecting the row data as the input context if needed
-          // For now, just trigger it using the standard executor
-          await triggerWorkflowRun(trigger.workflow_id, 'database_event');
+          // Fire the workflow, injecting the row data as the input context
+          await triggerWorkflowRun(trigger.workflow_id, 'database_event', rowData);
           firedCount++;
         } catch (err: any) {
           logger.error(`Failed to execute event workflow ${trigger.workflow_id}:`, { error: err.message });

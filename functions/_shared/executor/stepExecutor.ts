@@ -53,8 +53,12 @@ export async function executeStep(
         return { status: 'failed', error: e.message };
       }
       
-      // Artificial delay before retry
-      await new Promise(res => setTimeout(res, 1000));
+      // Bounded exponential backoff with jitter
+      const baseDelay = 1000;
+      const exponentialDelay = baseDelay * Math.pow(2, attempt - 1);
+      const jitter = Math.random() * 500;
+      const delay = Math.min(exponentialDelay + jitter, 10000); // Max 10 seconds per retry
+      await new Promise(res => setTimeout(res, delay));
     }
   }
   
