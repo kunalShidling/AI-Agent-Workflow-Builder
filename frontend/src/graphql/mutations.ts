@@ -1,8 +1,20 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_WORKFLOW = gql`
-  mutation CreateWorkflow($name: String!, $description: String, $orgId: uuid!) {
-    insert_workflows_one(object: { name: $name, description: $description, org_id: $orgId }) {
+  mutation CreateWorkflow(
+    $name: String!
+    $description: String
+    $orgId: uuid!
+    $createdBy: uuid!
+  ) {
+    insert_workflows_one(
+      object: {
+        name: $name
+        description: $description
+        org_id: $orgId
+        created_by: $createdBy
+      }
+    ) {
       id
     }
   }
